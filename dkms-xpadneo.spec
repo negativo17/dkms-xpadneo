@@ -3,7 +3,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0.9.1
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Advanced Linux Driver for Xbox One Wireless Gamepad
 License:    GPLv3
 URL:        https://atar-axis.github.io/%{dkms_name}
@@ -12,6 +12,7 @@ BuildArch:  noarch
 Source0:    https://github.com/atar-axis/%{dkms_name}/archive/refs/tags/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
+Patch0:     xpadneo-git.patch
 
 BuildRequires:  sed
 
@@ -58,5 +59,8 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Mon Aug 30 2021 Simone Caronni <negativo17@gmail.com> - 0.9.1-2
+- Add upstream patches.
+
 * Mon Aug 16 2021 Simone Caronni <negativo17@gmail.com> - 0.9.1-1
 - First build.
