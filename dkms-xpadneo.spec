@@ -1,5 +1,5 @@
-%global commit0 5970c4cb7f3671b21816673e2606c8661fd8558c
-%global date 20230617
+%global commit0 bce97bd057ce6fcc30bc53a9deb6c0728d31dd1d
+%global date 20240130
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global tag %{version}
 
@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0.9.5
-Release:    3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:    4%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:    Advanced Linux Driver for Xbox One Wireless Gamepad
 License:    GPLv3
 URL:        https://atar-axis.github.io/%{dkms_name}
@@ -72,6 +72,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Tue Feb 06 2024 Simone Caronni <negativo17@gmail.com> - 0.9.5-4.20240130gitbce97bd
+- Update to latest snapshot.
+
 * Wed Jun 21 2023 Simone Caronni <negativo17@gmail.com> - 0.9.5-3.20230617git5970c4c
 - Update to latest snapshot.
 
