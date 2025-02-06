@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0.9.7%{!?tag:^%{date}git%{shortcommit0}}
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Advanced Linux Driver for Xbox One Wireless Gamepad
 License:    GPLv3
 URL:        https://atar-axis.github.io/%{dkms_name}
@@ -21,7 +21,6 @@ Source0:    https://github.com/atar-axis/%{dkms_name}/archive/%{commit0}.tar.gz#
 %endif
 
 Source1:    %{name}.conf
-Source2:    dkms-no-weak-modules.conf
 
 BuildRequires:  sed
 
@@ -42,6 +41,7 @@ Advanced Linux Driver for Xbox One Wireless Gamepad.
 cp -f %{SOURCE1} hid-xpadneo/src/dkms.conf
 
 sed -i -e 's/__VERSION_STRING/%{version}/g' hid-xpadneo/src/dkms.conf
+sed -i -e 's/$(VERSION)/v%{version}/g' hid-xpadneo/src/Makefile
 
 %build
 
@@ -49,11 +49,6 @@ sed -i -e 's/__VERSION_STRING/%{version}/g' hid-xpadneo/src/dkms.conf
 # Create empty tree:
 mkdir -p %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 cp -fr hid-xpadneo/src/* %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
-
-%if 0%{?fedora}
-# Do not enable weak modules support in Fedora (no kABI):
-install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.conf
-%endif
 
 %post
 dkms add -m %{dkms_name} -v %{version} -q --rpm_safe_upgrade || :
@@ -67,11 +62,12 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
-%if 0%{?fedora}
-%{_sysconfdir}/dkms/%{dkms_name}.conf
-%endif
 
 %changelog
+* Thu Feb 06 2025 Simone Caronni <negativo17@gmail.com> - 0.9.7-2
+- Do not set NO_WEAK_MODULES, Fedora does not have kABI.
+- Simplify DKMS configuration file.
+
 * Wed Dec 25 2024 Simone Caronni <negativo17@gmail.com> - 0.9.7-1
 - Update to 0.9.7.
 
