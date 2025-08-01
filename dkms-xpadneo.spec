@@ -1,14 +1,14 @@
-%global commit0 8d20a23e38883f45c78f48c8574ac93945b4cb03
-%global date 20241224
+%global commit0 a16acb03e7be191d47ebfbc8ca1d5223422dac3e
+%global date 20250705
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global tag %{version}
+#global tag %{version}
 
 %global debug_package %{nil}
 %global dkms_name xpadneo
 
 Name:       dkms-%{dkms_name}
 Version:    0.9.7%{!?tag:^%{date}git%{shortcommit0}}
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    Advanced Linux Driver for Xbox One Wireless Gamepad
 License:    GPLv3
 URL:        https://atar-axis.github.io/%{dkms_name}
@@ -64,6 +64,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Fri Aug 01 2025 Simone Caronni <negativo17@gmail.com> - 0.9.7^20250705gita16acb0-3
+- Update to latest snapshot.
+
 * Thu Feb 06 2025 Simone Caronni <negativo17@gmail.com> - 0.9.7-2
 - Do not set NO_WEAK_MODULES, Fedora does not have kABI.
 - Simplify DKMS configuration file.
