@@ -1,14 +1,14 @@
 %global commit0 a16acb03e7be191d47ebfbc8ca1d5223422dac3e
 %global date 20250705
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-#global tag %{version}
+%global tag %{version}
 
 %global debug_package %{nil}
 %global dkms_name xpadneo
 
 Name:       dkms-%{dkms_name}
-Version:    0.9.7%{!?tag:^%{date}git%{shortcommit0}}
-Release:    4%{?dist}
+Version:    0.9.8%{!?tag:^%{date}git%{shortcommit0}}
+Release:    5%{?dist}
 Summary:    Advanced Linux Driver for Xbox One Wireless Gamepad
 License:    GPLv3
 URL:        https://atar-axis.github.io/%{dkms_name}
@@ -64,6 +64,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Sat Jan 03 2026 Simone Caronni <negativo17@gmail.com> - 0.9.8-5
+- Update to 0.9.8.
+
 * Wed Oct 08 2025 Simone Caronni <negativo17@gmail.com> - 0.9.7^20250705gita16acb0-4
 - Fix modules not getting rebuilt when reinstalling package.
 - Do not filter out as success module build steps.
