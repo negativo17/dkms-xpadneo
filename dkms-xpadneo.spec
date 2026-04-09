@@ -2,7 +2,7 @@
 %global dkms_name xpadneo
 
 Name:       dkms-%{dkms_name}
-Version:    0.10.1
+Version:    0.10.2
 Release:    1%{?dist}
 Summary:    Advanced Linux Driver for Xbox One Wireless Gamepad
 License:    GPL-2.0-only
@@ -51,6 +51,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Thu Apr 09 2026 Simone Caronni <negativo17@gmail.com> - 0.10.2-1
+- Update to 0.10.2.
+
 * Wed Mar 25 2026 Simone Caronni <negativo17@gmail.com> - 0.10.1-1
 - Update to 0.10.1.
 
